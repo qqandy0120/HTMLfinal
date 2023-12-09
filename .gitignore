@@ -1,0 +1,6 @@
+ckpts/
+logs/
+models/
+outputs/
+backup.py
+*.csv

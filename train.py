@@ -110,10 +110,10 @@ if __name__ == '__main__':
 
     ckpt_cb = ModelCheckpoint(
         dirpath=hparams.ckpt_dir / hparams.exp_name,
-        filename='{epoch:d}',
+        filename='exp',
         monitor='val/loss',
         mode='min',
-        save_top_k=3,
+        save_top_k=1,
     )
     early_stop = EarlyStopping(monitor='val/loss', mode='min', patience=hparams.patience)
     pbar = TQDMProgressBar(refresh_rate=1)  # show progress bar in terminal

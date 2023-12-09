@@ -9,7 +9,7 @@ import torch
 from torch.utils.data import Dataset
 from util import *
 import random
-SPLITS = ['train', 'valid', 'test_1021']
+SPLITS = ['train', 'valid', 'test_1021', 'test_1204', 'test_1211']
 MODES = ['normal', 'y_only']
 
 class BikeDataset(Dataset):
@@ -44,7 +44,7 @@ class BikeDataset(Dataset):
         labels_tensor = torch.tensor([labels]).to(torch.float32)
         return{
             'id': self.df.iloc[index:index+self.time_step,0].tolist(),
-            'feature': features_tensor.view(6, -1),
+            'feature': features_tensor.view(self.time_step, -1),
             'label': labels_tensor,
             'pred_target': self.df.iloc[index+self.time_step,0]
         }

@@ -62,6 +62,13 @@ def get_stat_raw_data(station_id, split, time_step):
     if split == 'test_1021':
         date_list = ['20231020']
         pred_date = ['20231021', '20231022', '20231023', '20231024']
+    if split == 'test_1204':
+        date_list = ['20231126']  # need to be update when 1203 data are released
+        pred_date = [f'202312{str(no).zfill(2)}' for no in range(4, 11)]  # 1204 to 1210
+    if split == 'test_1211':
+        date_list = ['20231208']
+        pred_date = [f'202312{str(no).zfill(2)}' for no in range(9, 18)]
+
 
     for date in date_list:
             day = str(datetime.strptime(date, '%Y%m%d').weekday())
@@ -78,7 +85,7 @@ def get_stat_raw_data(station_id, split, time_step):
                         future_time = time
                         while not data[future_time]:
                             future_time = add_one_minute(future_time)
-                            if future_time == '00:00' or delta_time(time, future_time) > 15:
+                            if future_time == '00:00':
                                 not_found = True
                         value = data[future_time]['sbi'] if not not_found else -1
                     else:
